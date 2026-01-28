@@ -21,7 +21,7 @@ const SiteLayout = () => {
           </Container>
         )}
       </main>
-      {!isHome && <Footer />}
+      <Footer />
       {/* Render once at the root so every page can share the same cursor. */}
       <CustomCursor />
     </div>
