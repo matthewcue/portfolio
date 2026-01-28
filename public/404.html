@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting…</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Redirecting…</p>
+    <script>
+      const path = window.location.pathname;
+      const search = window.location.search;
+      const hash = window.location.hash;
+      const target = path + search + hash;
+      const encoded = encodeURIComponent(target);
+      const redirectUrl = `/index.html?redirect=${encoded}`;
+      window.location.replace(redirectUrl);
+    </script>
+  </body>
+</html>

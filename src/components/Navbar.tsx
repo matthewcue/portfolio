@@ -129,7 +129,7 @@ const Navbar = () => {
               height: isCondensed ? 50 : 64,
               paddingInline: isCondensed ? 16 : 22,
               gap: isCondensed ? 10 : 16,
-              borderRadius: isCondensed ? 12 : 14,
+              borderRadius: 0,
               backgroundColor: isCondensed
                 ? "var(--nav-surface-solid)"
                 : "var(--nav-surface-glass)",

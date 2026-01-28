@@ -9,8 +9,8 @@
   --accent-soft: rgba(37, 99, 235, 0.12);
   --accent-strong: rgba(37, 99, 235, 0.85);
   --navbar-height: 72px;
-  --nav-surface-glass: rgba(255, 255, 255, 0.6);
-  --nav-surface-solid: rgba(255, 255, 255, 0.96);
+  --nav-surface-glass: var(--bg);
+  --nav-surface-solid: var(--bg);
   --nav-border-soft: color-mix(in srgb, var(--accent) 22%, transparent);
   --nav-border-strong: color-mix(in srgb, var(--accent) 38%, transparent);
   --footer-surface: #f1f3f7;
@@ -26,8 +26,8 @@
   --accent: #60a5fa;
   --accent-soft: rgba(96, 165, 250, 0.15);
   --accent-strong: rgba(96, 165, 250, 0.85);
-  --nav-surface-glass: rgba(15, 23, 42, 0.6);
-  --nav-surface-solid: rgba(15, 23, 42, 0.94);
+  --nav-surface-glass: var(--bg);
+  --nav-surface-solid: var(--bg);
   --nav-border-soft: color-mix(in srgb, var(--accent) 22%, transparent);
   --nav-border-strong: color-mix(in srgb, var(--accent) 38%, transparent);
   --footer-surface: #111827;
@@ -98,6 +98,7 @@ a {
   display: flex;
   justify-content: center;
   padding: 1rem 1.5rem 0.5rem;
+  background: var(--bg);
   pointer-events: none;
 }
 
@@ -116,6 +117,7 @@ a {
   border: 1px solid var(--nav-border-soft);
   background: var(--nav-surface-glass);
   box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+  border-radius: 0;
 }
 
 .nav-list {
@@ -137,7 +139,7 @@ a {
   align-items: center;
   gap: 0.55rem;
   padding: 0.4rem 0.75rem;
-  border-radius: 10px;
+  border-radius: 0;
   color: var(--muted);
   font-weight: 500;
   transition: color 0.2s ease;
@@ -170,7 +172,7 @@ a {
 .nav-cursor {
   position: absolute;
   inset: 2px;
-  border-radius: 10px;
+  border-radius: 0;
   background: var(--nav-accent-soft);
   border: 1px solid color-mix(in srgb, var(--nav-accent) 52%, transparent);
   z-index: 1;
@@ -185,7 +187,7 @@ a {
   font-weight: 700;
   font-size: 1rem;
   padding: 0.4rem 0.6rem;
-  border-radius: 10px;
+  border-radius: 0;
   background: var(--nav-surface-glass);
   border: 1px solid var(--nav-border-soft);
 }
@@ -198,7 +200,7 @@ a {
   padding: 0.5rem 0.9rem;
   background: var(--nav-surface-solid);
   border: 1px solid var(--nav-border-strong);
-  border-radius: 12px;
+  border-radius: 0;
   box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
 }
 
@@ -211,7 +213,7 @@ a {
 .nav-mobile-toggle {
   border: 1px solid var(--border);
   background: var(--card);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 0.35rem 0.5rem;
   display: inline-flex;
   align-items: center;
@@ -231,7 +233,7 @@ a {
 .nav-mobile-panel {
   width: min(480px, 100%);
   background: var(--card);
-  border-radius: 18px;
+  border-radius: 0;
   border: 1px solid var(--border);
   padding: 1.5rem;
   box-shadow: 0 24px 48px rgba(15, 23, 42, 0.2);
@@ -265,12 +267,13 @@ a {
 
 .nav-cursor-mobile {
   inset: 3px;
+  border-radius: 0;
 }
 
 .theme-toggle {
   border: 1px solid var(--border);
   background: var(--card);
-  border-radius: 999px;
+  border-radius: 0;
   padding: 0.35rem 0.6rem;
 }
 
