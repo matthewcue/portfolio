@@ -1,0 +1,51 @@
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
+
+const navItems = [
+  { label: "Home", to: "/" },
+  { label: "Projects", to: "/projects" },
+  { label: "Lab", to: "/lab" },
+  { label: "Skills", to: "/skills" },
+  { label: "Writing", to: "/writing" },
+  { label: "About", to: "/about" },
+  { label: "Resume", to: "/resume" }
+];
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <header className="navbar">
+      <div className="navbar-inner">
+        <NavLink className="navbar-brand" to="/" onClick={() => setIsOpen(false)}>
+          CJ
+        </NavLink>
+        <button
+          className="navbar-toggle"
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-expanded={isOpen}
+          aria-label="Toggle navigation"
+        >
+          ☰
+        </button>
+        <nav className={`navbar-links ${isOpen ? "open" : ""}`}>
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) => (isActive ? "active" : "")}
+              onClick={() => setIsOpen(false)}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+          <ThemeToggle />
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

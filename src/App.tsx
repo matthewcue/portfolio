@@ -1,0 +1,49 @@
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import SiteLayout from "./layout/SiteLayout";
+import ThemeProvider from "./theme/ThemeProvider";
+import HomePage from "./pages/HomePage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
+import LabPage from "./pages/LabPage";
+import SkillsPage from "./pages/SkillsPage";
+import WritingPage from "./pages/WritingPage";
+import PostDetailPage from "./pages/PostDetailPage";
+import AboutPage from "./pages/AboutPage";
+import ResumePage from "./pages/ResumePage";
+import NotFoundPage from "./pages/NotFoundPage";
+
+// Routes are defined here so the router tree stays easy to scan.
+const AppRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route element={<SiteLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+          <Route path="/lab" element={<LabPage />} />
+          <Route path="/skills" element={<SkillsPage />} />
+          <Route path="/writing" element={<WritingPage />} />
+          <Route path="/writing/:slug" element={<PostDetailPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
+const App = () => (
+  <BrowserRouter>
+    {/* ThemeProvider owns light/dark state and localStorage persistence. */}
+    <ThemeProvider>
+      <AppRoutes />
+    </ThemeProvider>
+  </BrowserRouter>
+);
+
+export default App;
