@@ -649,7 +649,7 @@ a {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 3.5rem;
   align-items: center;
 }
@@ -701,53 +701,84 @@ a {
 
 .hero-media {
   position: relative;
-  display: grid;
-  gap: 1.5rem;
-  justify-items: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  justify-self: center;
+  width: 100%;
+  max-width: clamp(280px, 34vw, 400px);
 }
 
 .hero-photo-card {
   position: relative;
-  background: var(--card);
-  border-radius: 18px;
-  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
+  border-radius: 0;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.25), transparent 70%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent) 10%, var(--card) 90%),
+      color-mix(in srgb, var(--accent) 4%, var(--bg) 96%)
+    );
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border) 65%);
+  box-shadow:
+    0 16px 35px rgba(15, 23, 42, 0.35),
+    0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent);
+  backdrop-filter: blur(18px);
+  transition:
+    transform 160ms ease-out,
+    box-shadow 160ms ease-out,
+    border-color 160ms ease-out;
 }
 
 .hero-photo-card img {
   display: block;
-  width: min(420px, 100%);
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .hero-photo-card:hover {
-  transform: rotateY(3deg);
-  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.22);
+  transform: translateY(-1px);
+  box-shadow:
+    0 20px 40px rgba(15, 23, 42, 0.4),
+    0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent);
 }
 
 .hero-photo-strip {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(15, 23, 42, 0.75);
-  color: #f8fafc;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--card) 85%, var(--accent) 15%);
+  border-top: 1px solid color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
 }
 
 .hero-pill-group {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  justify-content: center;
 }
 
 .hero-pill {
-  position: absolute;
+  position: static;
   background: var(--card);
   border: 1px solid var(--accent);
   color: var(--accent);
@@ -1214,13 +1245,15 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .primary-button,
-  .secondary-button {
+  .secondary-button,
+  .hero-photo-card {
     transition: none;
   }
 
   .primary-button:hover,
   .primary-button:active,
-  .secondary-button:hover {
+  .secondary-button:hover,
+  .hero-photo-card:hover {
     transform: none;
   }
 
@@ -2255,8 +2288,12 @@ a {
     padding: 4.5rem 0;
   }
 
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
   .hero-media {
-    justify-items: center;
+    align-items: center;
   }
 
   .hero-pill {

@@ -89,7 +89,7 @@ const HomePage = () => {
 
   const heroTextY = useTransform(heroScroll, [0, 1], [0, -40]);
   const heroTextOpacity = useTransform(heroScroll, [0, 1], [1, 0.6]);
-  const heroMediaY = useTransform(heroScroll, [0, 1], [0, -24]);
+  const heroMediaY = useTransform(heroScroll, [0, 1], [-12, 8]);
   const pillDrift = useTransform(heroScroll, [0, 1], [0, -12]);
   const pillDriftAlt = useTransform(heroScroll, [0, 1], [0, 10]);
 
