@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import SiteLayout from "./layout/SiteLayout";
 import ThemeProvider from "./theme/ThemeProvider";
@@ -11,7 +11,6 @@ import SkillsPage from "./pages/SkillsPage";
 import WritingPage from "./pages/WritingPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import AboutPage from "./pages/AboutPage";
-import ResumePage from "./pages/ResumePage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 // Routes are defined here so the router tree stays easy to scan.
@@ -30,7 +29,7 @@ const AppRoutes = () => {
           <Route path="/writing" element={<WritingPage />} />
           <Route path="/writing/:slug" element={<PostDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/resume" element={<Navigate to="/about" replace />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

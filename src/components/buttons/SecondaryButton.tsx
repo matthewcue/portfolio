@@ -20,6 +20,8 @@ type LinkProps = ButtonBaseProps & {
 type AnchorProps = ButtonBaseProps & {
   href: string;
   to?: never;
+  target?: string;
+  rel?: string;
 };
 
 type NativeButtonProps = ButtonBaseProps & {

@@ -1,31 +1,27 @@
+import type { FC } from "react";
 import PageTransition from "../components/PageTransition";
-import Section from "../components/Section";
-import profile from "../content/profile";
+import AboutHero from "../components/about/AboutHero";
+import QuickFactsSection from "../components/about/QuickFactsSection";
+import PathTimelineSection from "../components/about/PathTimelineSection";
+import HowIWorkSection from "../components/about/HowIWorkSection";
+import LookingForSection from "../components/about/LookingForSection";
+import OutsideWorkSection from "../components/about/OutsideWorkSection";
+import AboutCtaSection from "../components/about/AboutCtaSection";
 
-const AboutPage = () => (
-  <PageTransition>
-    <Section title="About" description="A short background and what I am looking for.">
-      <div className="about-layout">
-        <div>
-          <p>{profile.shortBio}</p>
-          <p>
-            I am looking for entry-level IT support or junior sysadmin roles where
-            I can keep learning, documenting, and helping end users.
-          </p>
-        </div>
-        <div className="about-card">
-          <h3>Quick facts</h3>
-          <ul>
-            <li><strong>Location:</strong> {profile.location}</li>
-            <li><strong>Email:</strong> {profile.email}</li>
-            {profile.interests?.map((interest) => (
-              <li key={interest}>{interest}</li>
-            ))}
-          </ul>
-        </div>
+const AboutPage: FC = () => {
+  return (
+    <PageTransition>
+      <div className="about-page">
+        <AboutHero />
+        <QuickFactsSection />
+        <PathTimelineSection />
+        <HowIWorkSection />
+        <LookingForSection />
+        <OutsideWorkSection />
+        <AboutCtaSection />
       </div>
-    </Section>
-  </PageTransition>
-);
+    </PageTransition>
+  );
+};
 
 export default AboutPage;

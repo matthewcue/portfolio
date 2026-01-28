@@ -45,7 +45,7 @@ const Footer = () => {
               { label: "Home", to: "/" },
               { label: "Projects", to: "/projects" },
               { label: "Skills", to: "/skills" },
-              { label: "Resume", to: "/resume" }
+              { label: "About", to: "/about" }
             ].map((item) => (
               <Link
                 key={item.to}

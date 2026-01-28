@@ -6,6 +6,7 @@ import Icon from "../components/Icon";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import SecondaryButton from "../components/buttons/SecondaryButton";
 import { useTheme } from "../theme/ThemeProvider";
+import profile from "../content/profile";
 import {
   ArrowRightIcon,
   DocumentArrowDownIcon,
@@ -337,13 +338,13 @@ const HomePage = () => {
                 </p>
                 <div className="contact-actions">
                   <PrimaryButton
-                    href="mailto:matthew@example.com"
+                    href={`mailto:${profile.email}`}
                     icon={<Icon><EnvelopeIcon /></Icon>}
                   >
                     Email me
                   </PrimaryButton>
                   <SecondaryButton
-                    to="/resume"
+                    to="/about"
                     icon={<Icon><DocumentArrowDownIcon /></Icon>}
                   >
                     Download resume
@@ -377,7 +378,7 @@ const HomePage = () => {
               <span>© 2024 Matthew Cue</span>
               <div className="panel-footer-links">
                 <Link to="/about">About</Link>
-                <Link to="/resume">Resume</Link>
+                <Link to="/about">Resume</Link>
               </div>
             </motion.div>
           </section>

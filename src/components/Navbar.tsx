@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Bars3Icon,
   BeakerIcon,
-  DocumentTextIcon,
   FolderIcon,
   HomeIcon,
   PencilSquareIcon,
@@ -25,8 +24,7 @@ const navItems = [
   { label: "Lab", to: "/lab", icon: BeakerIcon },
   { label: "Skills", to: "/skills", icon: SparklesIcon },
   { label: "Writing", to: "/writing", icon: PencilSquareIcon },
-  { label: "About", to: "/about", icon: UserCircleIcon },
-  { label: "Resume", to: "/resume", icon: DocumentTextIcon }
+  { label: "About", to: "/about", icon: UserCircleIcon }
 ];
 
 const MOBILE_BREAKPOINT = 880;

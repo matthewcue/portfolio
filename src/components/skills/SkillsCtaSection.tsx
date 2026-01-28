@@ -33,7 +33,7 @@ const SkillsCtaSection = ({ email }: SkillsCtaSectionProps) => {
             <PrimaryButton href={`mailto:${email}`} icon={<Icon><EnvelopeIcon /></Icon>}>
               Email me
             </PrimaryButton>
-            <SecondaryButton to="/resume" icon={<Icon><ArrowRightIcon /></Icon>}>
+            <SecondaryButton to="/about" icon={<Icon><ArrowRightIcon /></Icon>}>
               Download resume
             </SecondaryButton>
           </div>
