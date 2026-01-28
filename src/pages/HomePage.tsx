@@ -355,11 +355,8 @@ const HomePage = () => {
                     <PrimaryButton href={`mailto:${profile.email}`} icon={<Icon><EnvelopeIcon /></Icon>}>
                       Email me
                     </PrimaryButton>
-<<<<<<< ours
-                    <SecondaryButton href={profile.resumeUrl} download icon={<Icon><DocumentArrowDownIcon /></Icon>}>
-=======
                     <SecondaryButton href="/matthew-cue_resume.pdf" download icon={<Icon><DocumentArrowDownIcon /></Icon>}>
->>>>>>> theirs
+                    <SecondaryButton href={profile.resumeUrl} download icon={<Icon><DocumentArrowDownIcon /></Icon>}>
                       Download resume
                     </SecondaryButton>
                   </div>
@@ -388,11 +385,8 @@ const HomePage = () => {
                 <span>© 2024 Matthew Cue</span>
                 <div className="panel-footer-links">
                   <Link to="/about">About</Link>
-<<<<<<< ours
-                  <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
-=======
                   <a href="/matthew-cue_resume.pdf" target="_blank" rel="noreferrer">
->>>>>>> theirs
+                  <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
                     Resume
                   </a>
                 </div>

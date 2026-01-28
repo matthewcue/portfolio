@@ -9,11 +9,8 @@ const ResumePage = () => (
         Download my resume as a PDF. An ATS-friendly version is available upon request.
       </p>
       <div className="button-row">
-<<<<<<< ours
-        <a className="button" href={profile.resumeUrl} download>
-=======
         <a className="button" href="/matthew-cue_resume.pdf" download>
->>>>>>> theirs
+        <a className="button" href={profile.resumeUrl} download>
           Download PDF
         </a>
         <a className="button ghost" href="/matthew-cue_resume.pdf" target="_blank" rel="noreferrer">
