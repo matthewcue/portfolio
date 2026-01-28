@@ -12,6 +12,7 @@ import {
   XMarkIcon
 } from "@heroicons/react/24/outline";
 import Icon from "./Icon";
+import ThemeToggle from "./ThemeToggle";
 import { useCursor } from "../cursor/CursorContext";
 import { useTheme } from "../theme/ThemeProvider";
 
@@ -79,6 +80,17 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
     setExpandedItemId(null);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMobile || !isMobileMenuOpen) {
+      return undefined;
+    }
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isMobile, isMobileMenuOpen]);
 
   const navCursorTransition = prefersReducedMotion
     ? { duration: 0 }
@@ -250,6 +262,16 @@ const Navbar = () => {
             >
               <div className="nav-mobile-header">
                 <span className="nav-mobile-title">Navigate</span>
+                <button
+                  className="nav-mobile-close"
+                  type="button"
+                  aria-label="Close navigation"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  onPointerEnter={() => setInteractive(true)}
+                  onPointerLeave={() => setInteractive(false)}
+                >
+                  <XMarkIcon className="nav-mobile-close-icon" />
+                </button>
               </div>
               <ul className="nav-mobile-list" role="list">
                 {navItems.map((item) => {
@@ -282,6 +304,14 @@ const Navbar = () => {
                   );
                 })}
               </ul>
+              <div className="nav-mobile-footer">
+                <div className="nav-mobile-theme-row">
+                  <span className="nav-mobile-theme-label">Theme</span>
+                  <div className="nav-mobile-theme-control">
+                    <ThemeToggle />
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
