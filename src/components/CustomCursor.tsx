@@ -38,6 +38,19 @@ const CustomCursor = () => {
     return () => window.removeEventListener("pointermove", handleMove);
   }, [isPointerFine, x, y]);
 
+  useEffect(() => {
+    if (!isPointerFine) {
+      return;
+    }
+
+    const shouldHideNativeCursor = cursorMode !== "hidden";
+    document.body.classList.toggle("cursor-hidden", shouldHideNativeCursor);
+
+    return () => {
+      document.body.classList.remove("cursor-hidden");
+    };
+  }, [cursorMode, isPointerFine]);
+
   if (!isPointerFine) {
     return null;
   }

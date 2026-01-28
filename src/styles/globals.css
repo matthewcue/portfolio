@@ -35,6 +35,12 @@ body {
   line-height: 1.6;
 }
 
+/* Hide the native cursor when the custom cursor is active. */
+body.cursor-hidden,
+body.cursor-hidden * {
+  cursor: none;
+}
+
 /* Custom cursor base styles (motion/size are controlled via Framer Motion). */
 .custom-cursor {
   position: fixed;
