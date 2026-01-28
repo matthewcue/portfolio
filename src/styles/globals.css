@@ -241,6 +241,17 @@ a {
     background: transparent;
   }
 
+  html,
+  body,
+  #root {
+    overflow-x: hidden;
+  }
+
+  .home-page,
+  .home-scroll {
+    overflow-x: hidden;
+  }
+
   .site-header--mobile-home {
     top: 0;
     padding-top: env(safe-area-inset-top, 0px);
@@ -890,6 +901,20 @@ a {
   gap: 0.5rem;
   margin-top: 0.75rem;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .home-section-inner,
+  .hero,
+  .hero-media,
+  .hero-photo-card,
+  .hero-pill-group {
+    max-width: 100%;
+  }
+
+  .home-section-inner {
+    width: 100%;
+  }
 }
 
 .hero-pill {
