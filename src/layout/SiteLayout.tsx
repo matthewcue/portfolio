@@ -14,7 +14,7 @@ const SiteLayout = () => {
     <div className="app-shell">
       <Navbar />
       <ThemeToggleFloating />
-      <main className={`app-main ${isHome ? "home-main" : ""}`.trim()}>
+      <main className={isHome ? "app-main home-main" : "app-main"}>
         {isHome ? (
           <Outlet />
         ) : (
@@ -23,7 +23,7 @@ const SiteLayout = () => {
           </Container>
         )}
       </main>
-      <Footer />
+      {!isHome && <Footer />}
       {/* Render once at the root so every page can share the same cursor. */}
       <CustomCursor />
     </div>
