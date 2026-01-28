@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Container from "../components/Container";
 import CustomCursor from "../components/CustomCursor";
+import ThemeToggleFloating from "../components/ThemeToggleFloating";
 
 // Shared shell for all pages: header, main content, and footer.
 const SiteLayout = () => {
@@ -12,6 +13,7 @@ const SiteLayout = () => {
   return (
     <div className="app-shell">
       <Navbar />
+      <ThemeToggleFloating />
       <main className={`app-main ${isHome ? "home-main" : ""}`.trim()}>
         {isHome ? (
           <Outlet />

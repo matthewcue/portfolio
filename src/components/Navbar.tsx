@@ -12,7 +12,6 @@ import {
   UserCircleIcon,
   XMarkIcon
 } from "@heroicons/react/24/outline";
-import ThemeToggle from "./ThemeToggle";
 import Icon from "./Icon";
 import { useCursor } from "../cursor/CursorContext";
 import { useTheme } from "../theme/ThemeProvider";
@@ -37,6 +36,8 @@ const Navbar = () => {
   const [isCondensed, setIsCondensed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
+  const [canHover, setCanHover] = useState(false);
 
   // Track scroll position to switch between expanded and condensed nav states.
   useEffect(() => {
@@ -64,7 +65,21 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    const pointerQuery = window.matchMedia("(pointer: fine)");
+
+    const handlePointerChange = (event: MediaQueryListEvent | MediaQueryList) => {
+      setCanHover(event.matches);
+    };
+
+    handlePointerChange(pointerQuery);
+    pointerQuery.addEventListener("change", handlePointerChange);
+
+    return () => pointerQuery.removeEventListener("change", handlePointerChange);
+  }, []);
+
+  useEffect(() => {
     setIsMobileMenuOpen(false);
+    setExpandedItemId(null);
   }, [location.pathname]);
 
   const navCursorTransition = prefersReducedMotion
@@ -93,6 +108,8 @@ const Navbar = () => {
         Expanded vs. condensed layout:
         - Expanded shows full labels and a taller pill with extra padding.
         - Condensed shrinks the pill and hides labels while keeping them in the DOM.
+        - The pill is fixed to the viewport to float above sections. Adjust the
+          top offset in globals.css and the main padding in SiteLayout if overlap occurs.
       */}
       <nav className="site-nav" aria-label="Main navigation">
         {isMobile ? (
@@ -106,7 +123,6 @@ const Navbar = () => {
               MC
             </Link>
             <div className="nav-mobile-actions">
-              <ThemeToggle />
               <button
                 className="nav-mobile-toggle"
                 type="button"
@@ -125,8 +141,7 @@ const Navbar = () => {
             className="nav-pill"
             animate={{
               height: isCondensed ? 50 : 64,
-              paddingInline: isCondensed ? 16 : 22,
-              gap: isCondensed ? 10 : 16,
+              paddingInline: 0,
               borderRadius: 0,
               backgroundColor: isCondensed
                 ? "var(--nav-surface-solid)"
@@ -136,54 +151,82 @@ const Navbar = () => {
             }}
             transition={navContainerTransition}
           >
-            <ul className="nav-list" role="list">
-              {navItems.map((item) => {
-                const IconComponent = item.icon;
-                const isActive = isItemActive(item.to);
+            {/* Adjust padding/gap in .nav-items-wrapper / .nav-list to tweak pill density. */}
+            <div className="nav-items-wrapper">
+              <ul className="nav-list" role="list">
+                {navItems.map((item) => {
+                  const IconComponent = item.icon;
+                  const isActive = isItemActive(item.to);
+                  const showLabel =
+                    !isCondensed || expandedItemId === item.to || prefersReducedMotion;
 
-                return (
-                  <li key={item.to} className="nav-item">
-                    <Link
-                      className={`nav-link ${isActive ? "is-active" : ""}`.trim()}
-                      to={item.to}
-                      onPointerEnter={() => setInteractive(true)}
-                      onPointerLeave={() => setInteractive(false)}
-                    >
-                      {/*
-                        The moving "nav cursor" uses a shared layoutId so Framer Motion
-                        can smoothly animate the same element between nav items.
-                        Keeping the cursor rendered only for the active item gives
-                        a clean, single moving highlight instead of duplicates.
-                      */}
-                      {isActive && (
-                        <motion.span
-                          className="nav-cursor"
-                          layoutId="navCursor"
-                          transition={navCursorTransition}
-                        />
-                      )}
-                      <span className="nav-link-content">
-                        <Icon>
-                          <IconComponent />
-                        </Icon>
-                        <motion.span
-                          className="nav-link-label"
-                          animate={{
-                            opacity: isCondensed ? 0 : 1,
-                            maxWidth: isCondensed ? 0 : 140
-                          }}
-                          transition={navContainerTransition}
-                        >
-                          {item.label}
-                        </motion.span>
-                      </span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="nav-actions">
-              <ThemeToggle />
+                  return (
+                    <li key={item.to} className="nav-item">
+                      <Link
+                        className={`nav-link ${isActive ? "is-active" : ""}`.trim()}
+                        to={item.to}
+                        onPointerEnter={() => {
+                          setInteractive(true);
+                          if (isCondensed && canHover) {
+                            setExpandedItemId(item.to);
+                          }
+                        }}
+                        onPointerLeave={() => {
+                          setInteractive(false);
+                          if (isCondensed && canHover) {
+                            setExpandedItemId(null);
+                          }
+                        }}
+                        onFocus={() => {
+                          if (isCondensed) {
+                            setExpandedItemId(item.to);
+                          }
+                        }}
+                        onBlur={() => {
+                          if (isCondensed) {
+                            setExpandedItemId(null);
+                          }
+                        }}
+                      >
+                        {/*
+                          The moving "nav cursor" uses a shared layoutId so Framer Motion
+                          can smoothly animate the same element between nav items.
+                          Keeping the cursor rendered only for the active item gives
+                          a clean, single moving highlight instead of duplicates.
+                        */}
+                        {isActive && (
+                          <motion.span
+                            className="nav-cursor"
+                            layoutId="navCursor"
+                            transition={navCursorTransition}
+                          />
+                        )}
+                        <span className="nav-link-content">
+                          <Icon>
+                            <IconComponent />
+                          </Icon>
+                          <motion.span
+                            className="nav-link-label"
+                            animate={{
+                              opacity: showLabel ? 1 : 0,
+                              maxWidth: showLabel ? 200 : 0,
+                              marginLeft: showLabel ? 8 : 0
+                            }}
+                            transition={{
+                              duration: prefersReducedMotion ? 0 : 0.18,
+                              ease: "easeOut"
+                            }}
+                            // When condensed, only the hovered/focused item reveals its label.
+                            // Tweak timing or maxWidth here to adjust the peek behavior.
+                          >
+                            {item.label}
+                          </motion.span>
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </motion.div>
         )}
@@ -209,7 +252,6 @@ const Navbar = () => {
             >
               <div className="nav-mobile-header">
                 <span className="nav-mobile-title">Navigate</span>
-                <ThemeToggle />
               </div>
               <ul className="nav-mobile-list" role="list">
                 {navItems.map((item) => {
