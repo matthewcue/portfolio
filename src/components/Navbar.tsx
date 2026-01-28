@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import {
   Bars3Icon,
   BriefcaseIcon,
+  DocumentArrowDownIcon,
   HomeIcon,
   PencilSquareIcon,
   SparklesIcon,
@@ -158,6 +159,7 @@ const Navbar = () => {
               MC
             </Link>
             <div className="nav-mobile-actions">
+              <ThemeToggle />
               <button
                 className="nav-mobile-toggle"
                 type="button"
@@ -268,10 +270,7 @@ const Navbar = () => {
       </nav>
 
       {isMobile && isMobileMenuOpen && (
-        <div
-          className="nav-mobile-overlay nav-mobile-overlay--debug"
-          onClick={closeMobileMenu}
-        >
+        <div className="nav-mobile-overlay" onClick={closeMobileMenu}>
           <div className="nav-mobile-panel" onClick={(event) => event.stopPropagation()}>
             <div className="nav-mobile-header">
               <span className="nav-mobile-title">Navigate</span>
@@ -309,8 +308,26 @@ const Navbar = () => {
                       </span>
                     </Link>
                   </li>
-                );
+                  );
               })}
+              <li className="nav-mobile-item">
+                <a
+                  className="nav-mobile-link"
+                  href="/matthew-cue_resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={closeMobileMenu}
+                  onPointerEnter={() => setInteractive(true)}
+                  onPointerLeave={() => setInteractive(false)}
+                >
+                  <span className="nav-link-content">
+                    <Icon>
+                      <DocumentArrowDownIcon />
+                    </Icon>
+                    <span className="nav-link-label">Resume (PDF)</span>
+                  </span>
+                </a>
+              </li>
             </ul>
             <div className="nav-mobile-footer">
               <div className="nav-mobile-theme-row">

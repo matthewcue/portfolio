@@ -5,12 +5,16 @@ import posts from "../content/posts";
 
 const WritingPage = () => (
   <PageTransition>
-    <Section
-      title="Writing"
-      description="Short troubleshooting notes, lab reflections, and how-to guides."
-    >
-      <PostList posts={posts} />
-    </Section>
+    <div className="writing-page">
+      <Section
+        title="Writing"
+        description="Short troubleshooting notes, lab reflections, and how-to guides."
+      >
+        <div className="writing-list">
+          <PostList posts={posts} />
+        </div>
+      </Section>
+    </div>
   </PageTransition>
 );
 

@@ -9,6 +9,8 @@ import { DotGridOverlay } from "../components/home/DotGridOverlay";
 import { SocialChip } from "../components/home/SocialChip";
 import { useTheme } from "../theme/ThemeProvider";
 import profile from "../content/profile";
+import { workItems } from "../content/work";
+import posts from "../content/posts";
 import {
   ArrowRightIcon,
   DocumentArrowDownIcon,
@@ -28,6 +30,14 @@ const roadmapItems = [
   "Earn my first cloud certification (AWS or Azure fundamentals).",
   "Build more complete logging/monitoring in my homelab.",
   "Prepare for and pass CompTIA Security+."
+];
+
+const skillHighlights = [
+  "Help desk-style triage and ticket updates",
+  "Windows, macOS, and Ubuntu support",
+  "O365 + Google Workspace admin basics",
+  "PowerShell + Python task automation",
+  "AWS/Azure fundamentals (IAM, VMs)"
 ];
 
 const RoadmapTimeline = ({ items }: { items: string[] }) => (
@@ -121,6 +131,13 @@ const HomePage = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
+  const featuredWork = [
+    ...workItems.filter((item) => item.featured),
+    ...workItems.filter((item) => !item.featured)
+  ].slice(0, 4);
+
+  const writingPreview = posts.slice(0, 2);
+
   return (
     <PageTransition>
       <div className="home-page">
@@ -145,15 +162,15 @@ const HomePage = () => {
                   style={prefersReducedMotion ? undefined : { y: heroTextY, opacity: heroTextOpacity }}
                 >
                   <motion.p className="hero-overline" variants={heroVariants}>
-                    IT Support · Sysadmin · Cloud-in-Training
+                    IT Support · Sysadmin · Cloud (Junior)
                   </motion.p>
                   <motion.h1 className="hero-title" variants={heroVariants}>
-                    Matthew Cue
-                    <span>I keep systems running and users supported.</span>
+                    Hi, I&apos;m Matt.
+                    <span>I keep systems, people, and tickets moving.</span>
                   </motion.h1>
                   <motion.p className="hero-subcopy" variants={heroVariants}>
-                    I bring frontline customer experience into IT. I troubleshoot calmly, keep Windows and
-                    Linux machines usable, and build small tools that make support work smoother.
+                    Entry-level IT support and systems generalist. I troubleshoot calmly, keep endpoints
+                    usable, and build small scripts that make support work smoother.
                   </motion.p>
                   <motion.div className="hero-actions" variants={heroVariants}>
                     {/* Use Primary/SecondaryButton for consistent CTA styling and cursor hints. */}
@@ -237,9 +254,9 @@ const HomePage = () => {
                       className="snapshot-list"
                       style={prefersReducedMotion ? undefined : { y: snapshotBulletShift }}
                     >
-                      <li>Help friends, family, and classmates recover from OS and hardware issues.</li>
-                      <li>Diagnose Wi-Fi, DNS, and VPN problems on small networks.</li>
-                      <li>Keep Windows and Linux installs usable with basic hardening and updates.</li>
+                      <li>Help desk-style triage, ticket notes, and calm user support.</li>
+                      <li>Windows, macOS, and Ubuntu troubleshooting + setup.</li>
+                      <li>Diagnose Wi-Fi, DNS, and VPN issues on small networks.</li>
                     </motion.ul>
                     <Link className="text-link" to="/work">
                       See more examples →
@@ -258,14 +275,14 @@ const HomePage = () => {
                         : snapshotShadow
                     }}
                   >
-                    <h3>Tools &amp; experiments</h3>
+                    <h3>Admin basics &amp; labs</h3>
                     <motion.ul
                       className="snapshot-list"
                       style={prefersReducedMotion ? undefined : { y: snapshotBulletShift }}
                     >
-                      <li>Use SQL and basic scripting to explore data and automate simple tasks.</li>
-                      <li>Run a small homelab with VMs to practice server administration.</li>
-                      <li>Build lightweight web tools like this site to present my work.</li>
+                      <li>O365 + Google Workspace admin basics and account cleanup.</li>
+                      <li>Homelab with VMs for Windows/Linux practice.</li>
+                      <li>AWS/Azure fundamentals (IAM, VMs, storage).</li>
                     </motion.ul>
                     <Link className="text-link" to="/work">
                       Explore my lab →
@@ -285,11 +302,52 @@ const HomePage = () => {
               </div>
             </section>
 
-            {/* Panel 3: Skills + roadmap + contact (edit bullet lists and contact text here). */}
+            {/* Panel 3: Featured work (mobile: single column cards). */}
+            <section id="home-slide-3" className="home-panel home-slide work-panel">
+              <div className="home-section-inner">
+                <motion.div
+                  className="section-intro"
+                  variants={sectionIntroVariants}
+                  initial={prefersReducedMotion ? false : "hidden"}
+                  whileInView="visible"
+                  viewport={{ root: scrollRef, amount: 0.4, once: true }}
+                >
+                  <p className="section-label">Selected projects</p>
+                  <h2>Recent projects and lab work.</h2>
+                  <p className="muted">
+                    A few hands-on examples of ticket-driven troubleshooting, automation, and
+                    infrastructure practice.
+                  </p>
+                </motion.div>
+
+                <div className="home-project-grid">
+                  {featuredWork.map((item) => (
+                    <article key={item.slug} className="work-card home-project-card">
+                      <h3 className="work-card__title">{item.title}</h3>
+                      <p className="muted">{item.summary}</p>
+                      <div className="tag-row">
+                        {item.skills.slice(0, 3).map((skill) => (
+                          <span key={skill} className="tag-pill">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                      <Link className="text-link" to="/work">
+                        View details →
+                      </Link>
+                    </article>
+                  ))}
+                </div>
+                <Link className="text-link" to="/work">
+                  View all projects →
+                </Link>
+              </div>
+            </section>
+
+            {/* Panel 4: Skills + roadmap (mobile: stacked cards). */}
             <section
-              id="home-slide-3"
+              id="home-slide-4"
               className="home-panel home-slide roadmap-panel"
-              ref={roadmapRef}
             >
               <div className="home-section-inner roadmap-grid">
                 <div className="roadmap-copy">
@@ -308,37 +366,78 @@ const HomePage = () => {
                     whileInView="visible"
                     viewport={{ root: scrollRef, amount: 0.4, once: true }}
                   >
-                    Focused on support and systems now, growing into cloud and security.
+                    Skills &amp; tools I use today, plus what I&apos;m leveling up next.
                   </motion.h2>
 
                   <motion.div
-                    className="roadmap-section"
+                    className="roadmap-section home-skill-card"
                     initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ root: scrollRef, amount: 0.4, once: true }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   >
-                    <h3>Today</h3>
+                    <h3>Core support skills</h3>
                     <ul className="roadmap-list">
-                      <li>Supporting users on Windows and macOS</li>
-                      <li>Basic network troubleshooting (Wi-Fi, DNS, VPN)</li>
-                      <li>Intro Linux server admin (VM-based homelab)</li>
-                      <li>Simple automation with Python/PowerShell</li>
+                      {skillHighlights.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
                     </ul>
                   </motion.div>
 
                   <motion.div
-                    className="roadmap-section"
+                    className="roadmap-section home-skill-card"
                     initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ root: scrollRef, amount: 0.4, once: true }}
                     transition={{ duration: 0.4, ease: "easeOut", delay: prefersReducedMotion ? 0 : 0.08 }}
                   >
-                    <h3>Next 6–12 months</h3>
+                    <h3>Learning next</h3>
                     <RoadmapTimeline items={roadmapItems} />
                   </motion.div>
                 </div>
+              </div>
+            </section>
 
+            {/* Panel 5: Writing preview (mobile: stacked list). */}
+            <section id="home-slide-5" className="home-panel home-slide writing-panel">
+              <div className="home-section-inner">
+                <motion.div
+                  className="section-intro"
+                  variants={sectionIntroVariants}
+                  initial={prefersReducedMotion ? false : "hidden"}
+                  whileInView="visible"
+                  viewport={{ root: scrollRef, amount: 0.4, once: true }}
+                >
+                  <p className="section-label">Writing</p>
+                  <h2>Short notes from the lab.</h2>
+                  <p className="muted">Quick runbooks and troubleshooting checklists.</p>
+                </motion.div>
+
+                <div className="home-writing-list">
+                  {writingPreview.map((post) => (
+                    <article key={post.slug} className="home-writing-card">
+                      <h3>{post.title}</h3>
+                      <p className="muted">{new Date(post.date).toLocaleDateString()}</p>
+                      <p>{post.summary}</p>
+                      <Link className="text-link" to={`/writing/${post.slug}`}>
+                        Read post →
+                      </Link>
+                    </article>
+                  ))}
+                </div>
+                <Link className="text-link" to="/writing">
+                  View all writing →
+                </Link>
+              </div>
+            </section>
+
+            {/* Panel 6: Contact CTA (mobile: stacked actions). */}
+            <section
+              id="home-slide-6"
+              className="home-panel home-slide contact-panel"
+              ref={roadmapRef}
+            >
+              <div className="home-section-inner">
                 <motion.aside
                   className="contact-card"
                   initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.98 }}
@@ -346,16 +445,20 @@ const HomePage = () => {
                   viewport={{ root: scrollRef, amount: 0.4, once: true }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <h3>Ready for junior IT roles.</h3>
+                  <h3>Need an IT generalist who can grow into DevOps?</h3>
                   <p className="muted">
-                    Based in California, open to remote. I’m especially interested in support, junior
-                    sysadmin, or operations roles where I can keep learning cloud and security.
+                    Based in California, open to remote. I&apos;m especially interested in support,
+                    junior sysadmin, or operations roles where I can keep learning cloud and security.
                   </p>
                   <div className="contact-actions">
                     <PrimaryButton href={`mailto:${profile.email}`} icon={<Icon><EnvelopeIcon /></Icon>}>
                       Email me
                     </PrimaryButton>
-                    <SecondaryButton href={profile.resumeUrl} download icon={<Icon><DocumentArrowDownIcon /></Icon>}>
+                    <SecondaryButton
+                      href={profile.resumeUrl}
+                      download
+                      icon={<Icon><DocumentArrowDownIcon /></Icon>}
+                    >
                       Download resume
                     </SecondaryButton>
                   </div>

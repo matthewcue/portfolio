@@ -259,6 +259,10 @@ a {
     padding-top: env(safe-area-inset-top, 0px);
     background: transparent;
   }
+
+  .site-header--mobile-home .nav-mobile-bar {
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.16);
+  }
 }
 
 .site-nav {
@@ -374,6 +378,11 @@ a {
   gap: 0.6rem;
 }
 
+.nav-mobile-actions .theme-toggle {
+  min-height: 44px;
+  padding: 0.4rem 0.6rem;
+}
+
 .nav-mobile-toggle {
   border: 1px solid var(--border);
   background: var(--card);
@@ -395,10 +404,6 @@ a {
   background: rgba(15, 23, 42, 0.55);
   backdrop-filter: blur(18px);
   pointer-events: auto;
-}
-
-.nav-mobile-overlay--debug {
-  background: rgba(255, 0, 0, 0.35);
 }
 
 .nav-mobile-panel {
@@ -987,6 +992,43 @@ a {
   flex-direction: column;
   gap: 0.5rem;
   font-weight: 500;
+}
+
+.home-project-grid,
+.home-writing-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.home-project-card .muted,
+.home-writing-card .muted {
+  font-size: 0.9rem;
+}
+
+.home-project-card .muted {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-writing-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.home-skill-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 1.5rem;
 }
 
 .roadmap-panel {
@@ -2500,6 +2542,126 @@ a {
   }
 }
 
+@media (max-width: 768px) {
+  .app-main {
+    padding: calc(1.5rem + var(--floating-nav-offset)) 0 3rem;
+  }
+
+  .section {
+    margin: 2rem 0;
+  }
+
+  .home-panel {
+    padding: 2.5rem 0;
+  }
+
+  .home-slide {
+    align-items: stretch;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+
+  .hero-title span {
+    font-size: 1rem;
+  }
+
+  .hero-subcopy {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .primary-button,
+  .hero-actions .secondary-button {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .snapshot-grid,
+  .home-project-grid,
+  .home-writing-list,
+  .roadmap-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .snapshot-card,
+  .work-card,
+  .skills-area-card,
+  .about-card,
+  .home-skill-card,
+  .home-writing-card,
+  .contact-card {
+    padding: 1.25rem;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-actions .primary-button,
+  .contact-actions .secondary-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .panel-footer {
+    position: static;
+    transform: none;
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+
+  .work-filter-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .work-card-grid,
+  .work-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-card {
+    padding: 1.25rem;
+  }
+
+  .writing-list .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero__media {
+    justify-content: center;
+  }
+
+  .about-hero__media-card {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .about-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .about-hero__actions .primary-button,
+  .about-hero__actions .secondary-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* Work page */
 .sr-only {
   position: absolute;
@@ -2802,13 +2964,8 @@ a {
   }
 
   .work-highlights-grid {
-    display: flex;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-  }
-
-  .work-highlights-grid .work-card {
-    min-width: 260px;
+    display: grid;
+    padding-bottom: 0;
   }
 }
 
@@ -2835,5 +2992,12 @@ a {
 
   .home-slide {
     min-height: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-mobile-panel,
+  .nav-mobile-overlay {
+    transition: none;
   }
 }
