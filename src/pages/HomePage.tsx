@@ -174,10 +174,10 @@ const HomePage = () => {
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   style={prefersReducedMotion ? undefined : { y: heroMediaY }}
                 >
-                  <Link className="hero-photo-card" to="/about" aria-label="Learn more about Matthew Cue">
+                  <div className="hero-photo-card">
                     <img src={heroImage} alt="Portrait of Matthew Cue" />
                     <span className="hero-photo-strip">Based in California · Open to remote</span>
-                  </Link>
+                  </div>
                   <div className="hero-pill-group">
                     {heroPills.map((pill, index) => (
                       <motion.span
