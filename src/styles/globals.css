@@ -662,7 +662,6 @@ a {
   padding: 2rem 0 1rem;
 }
 
-/* Home page scroll snap: gives the “one section per flick” feel without scroll hijacking. */
 .home-page {
   min-height: 100vh;
   position: relative;
@@ -672,7 +671,6 @@ a {
   position: relative;
   min-height: 100vh;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   scroll-padding-top: var(--floating-nav-offset);
   -webkit-overflow-scrolling: touch;
@@ -695,17 +693,10 @@ a {
   padding: clamp(3rem, 6vh, 6rem) 0;
 }
 
-/* Apply .home-slide to every new home panel to keep scroll snapping consistent. */
 .home-slide {
   min-height: 100vh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   display: flex;
   align-items: center;
-}
-
-.home-slide--hero {
-  scroll-snap-stop: always;
 }
 
 .home-section-inner {
@@ -2840,12 +2831,9 @@ a {
     min-height: auto !important;
     height: auto !important;
     overflow-y: visible !important;
-    scroll-snap-type: none !important;
   }
 
   .home-slide {
     min-height: auto !important;
-    scroll-snap-align: none !important;
-    scroll-snap-stop: normal !important;
   }
 }
