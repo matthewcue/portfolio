@@ -7,8 +7,16 @@ const distDir = resolve("dist");
 const indexFile = resolve(distDir, "index.html");
 const notFoundFile = resolve(distDir, "404.html");
 
-if (existsSync(indexFile)) {
-  copyFileSync(indexFile, notFoundFile);
-  // eslint-disable-next-line no-console
-  console.log("Copied index.html to 404.html for SPA fallback.");
+if (!existsSync(indexFile)) {
+  process.exit(0);
 }
+
+if (existsSync(notFoundFile)) {
+  // eslint-disable-next-line no-console
+  console.log("404.html already exists; skipping SPA fallback copy.");
+  process.exit(0);
+}
+
+copyFileSync(indexFile, notFoundFile);
+// eslint-disable-next-line no-console
+console.log("Copied index.html to 404.html for SPA fallback.");

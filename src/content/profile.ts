@@ -20,13 +20,13 @@ export interface Profile {
 }
 
 const profile: Profile = {
-  fullName: "Casey Johnson",
+  fullName: "Matthew Cue",
   headline: "Entry-Level IT Support / Sysadmin",
   location: "California, USA",
   heroIntro: "Hands-on IT support candidate focused on reliable systems and calm troubleshooting.",
   heroSubcopy:
     "Building homelab projects to sharpen networking, security monitoring, and automation skills.",
-  email: "casey@example.com",
+  email: "matthew.cue@example.com",
   social: [
     { label: "GitHub", url: "https://github.com/username" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/username" }
