@@ -21,14 +21,14 @@ export const profile: Profile = {
   headline: "Entry-Level IT Support / Sysadmin · Cloud-In-Training",
   location: "California, USA",
   // TODO: Replace with your real email before publishing.
-  email: "matthew@example.com",
+  email: "mcue98@gmail.com",
   // TODO: Point this at your hosted resume PDF (ex: /resume.pdf in public or a cloud link).
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/matthew-cue_resume.pdf",
   aboutShort:
     "Entry-level IT support / sysadmin, focused on making systems usable and learning cloud and security as I go.",
   social: [
-    { label: "GitHub", url: "https://github.com/username" },
-    { label: "LinkedIn", url: "https://www.linkedin.com/in/username" }
+    { label: "GitHub", url: "https://github.com/matthewcue" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/matthew-cue-09b100167" }
   ]
 };
 
