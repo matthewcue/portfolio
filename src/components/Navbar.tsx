@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import { useCursor } from "../cursor/CursorContext";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -14,11 +15,18 @@ const navItems = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { setInteractive } = useCursor();
 
   return (
     <header className="navbar">
       <div className="navbar-inner">
-        <NavLink className="navbar-brand" to="/" onClick={() => setIsOpen(false)}>
+        <NavLink
+          className="navbar-brand"
+          to="/"
+          onClick={() => setIsOpen(false)}
+          onPointerEnter={() => setInteractive(true)}
+          onPointerLeave={() => setInteractive(false)}
+        >
           CJ
         </NavLink>
         <button
@@ -27,6 +35,8 @@ const Navbar = () => {
           onClick={() => setIsOpen((prev) => !prev)}
           aria-expanded={isOpen}
           aria-label="Toggle navigation"
+          onPointerEnter={() => setInteractive(true)}
+          onPointerLeave={() => setInteractive(false)}
         >
           ☰
         </button>
@@ -37,6 +47,8 @@ const Navbar = () => {
               to={item.to}
               className={({ isActive }) => (isActive ? "active" : "")}
               onClick={() => setIsOpen(false)}
+              onPointerEnter={() => setInteractive(true)}
+              onPointerLeave={() => setInteractive(false)}
             >
               {item.label}
             </NavLink>

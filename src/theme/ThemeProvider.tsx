@@ -8,6 +8,8 @@ interface ThemeContextValue {
   toggleTheme: () => void;
   prefersReducedMotion: boolean;
   accentColor: string;
+  accentColorSoft: string;
+  accentColorStrong: string;
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
@@ -52,6 +54,8 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     () => ACCENT_COLORS[Math.floor(Math.random() * ACCENT_COLORS.length)]
   );
   const prefersReducedMotion = useReducedMotion();
+  const accentColorSoft = hexToRgba(accentColor, 0.18);
+  const accentColorStrong = hexToRgba(accentColor, 0.85);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -60,17 +64,20 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     document.documentElement.style.setProperty("--accent", accentColor);
-    document.documentElement.style.setProperty("--accent-soft", hexToRgba(accentColor, 0.14));
-  }, [accentColor]);
+    document.documentElement.style.setProperty("--accent-soft", accentColorSoft);
+    document.documentElement.style.setProperty("--accent-strong", accentColorStrong);
+  }, [accentColor, accentColorSoft, accentColorStrong]);
 
   const value = useMemo(
     () => ({
       theme,
       toggleTheme: () => setTheme((prev) => (prev === "light" ? "dark" : "light")),
       prefersReducedMotion,
-      accentColor
+      accentColor,
+      accentColorSoft,
+      accentColorStrong
     }),
-    [theme, prefersReducedMotion, accentColor]
+    [theme, prefersReducedMotion, accentColor, accentColorSoft, accentColorStrong]
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

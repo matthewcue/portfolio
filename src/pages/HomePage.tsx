@@ -2,8 +2,17 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import PageTransition from "../components/PageTransition";
+import Icon from "../components/Icon";
+import PrimaryButton from "../components/buttons/PrimaryButton";
+import SecondaryButton from "../components/buttons/SecondaryButton";
 import { useTheme } from "../theme/ThemeProvider";
-import heroImage from "../assets/matthew_cue_heroimage.png";
+import {
+  ArrowRightIcon,
+  DocumentArrowDownIcon,
+  EnvelopeIcon,
+  UserCircleIcon
+} from "@heroicons/react/24/outline";
+import heroImage from "../assets/matthew_cue_heroimage.svg";
 
 const heroPills = [
   { label: "Windows & Linux", className: "pill-one" },
@@ -135,12 +144,17 @@ const HomePage = () => {
                   Linux machines usable, and build small tools that make support work smoother.
                 </motion.p>
                 <motion.div className="hero-actions" variants={heroVariants}>
-                  <Link className="button" to="/skills">
+                  {/* Use Primary/SecondaryButton for consistent CTA styling and cursor hints. */}
+                  <PrimaryButton
+                    to="/skills"
+                    size="lg"
+                    icon={<Icon><ArrowRightIcon /></Icon>}
+                  >
                     See what I work with
-                  </Link>
-                  <Link className="button ghost" to="/about">
+                  </PrimaryButton>
+                  <SecondaryButton to="/about" icon={<Icon><UserCircleIcon /></Icon>}>
                     Get to know me
-                  </Link>
+                  </SecondaryButton>
                 </motion.div>
               </motion.div>
 
@@ -322,12 +336,18 @@ const HomePage = () => {
                   sysadmin, or operations roles where I can keep learning cloud and security.
                 </p>
                 <div className="contact-actions">
-                  <a className="button" href="mailto:matthew@example.com">
+                  <PrimaryButton
+                    href="mailto:matthew@example.com"
+                    icon={<Icon><EnvelopeIcon /></Icon>}
+                  >
                     Email me
-                  </a>
-                  <Link className="button ghost" to="/resume">
+                  </PrimaryButton>
+                  <SecondaryButton
+                    to="/resume"
+                    icon={<Icon><DocumentArrowDownIcon /></Icon>}
+                  >
                     Download resume
-                  </Link>
+                  </SecondaryButton>
                 </div>
                 <div className="contact-links">
                   <a className="icon-link" href="https://github.com" aria-label="GitHub">
