@@ -6,7 +6,7 @@ const ThemeToggleFloating = () => {
 
   return (
     <div
-      className="theme-toggle-floating"
+      className="theme-toggle-floating nav-theme-toggle-inline"
       onPointerEnter={() => setInteractive(true)}
       onPointerLeave={() => setInteractive(false)}
     >
