@@ -80,7 +80,7 @@ const PrimaryButton = ({
 
   const content = (
     <>
-      <span className="button-label">{children}</span>
+      <span className="button-label primary-button-label">{children}</span>
       {icon && <span className="button-icon">{icon}</span>}
     </>
   );

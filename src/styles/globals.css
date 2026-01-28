@@ -8,6 +8,8 @@
   --accent: #2563eb;
   --accent-soft: rgba(37, 99, 235, 0.12);
   --accent-strong: rgba(37, 99, 235, 0.85);
+  /* primary button ink: dark, slightly accent-tinted */
+  --button-primary-ink: color-mix(in srgb, var(--accent) 35%, #020617 65%);
   --navbar-height: 72px;
   /* Adjust this offset if the floating nav overlaps your page content. */
   --floating-nav-offset: 96px;
@@ -48,6 +50,8 @@
   --accent: #60a5fa;
   --accent-soft: rgba(96, 165, 250, 0.15);
   --accent-strong: rgba(96, 165, 250, 0.85);
+  /* primary button ink: light, slightly accent-tinted */
+  --button-primary-ink: color-mix(in srgb, #e5e7eb 80%, var(--accent) 20%);
   --nav-surface-glass: var(--bg);
   --nav-surface-solid: var(--bg);
   --nav-border-soft: color-mix(in srgb, var(--accent) 22%, transparent);
@@ -1012,10 +1016,17 @@ a {
   min-height: 40px;
   padding: 0.7rem 1.2rem;
   font-weight: 500;
-  color: #f8fafc;
+  color: var(--button-primary-ink);
   border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border) 60%);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)),
+    linear-gradient(
+      to bottom,
+      rgba(15, 23, 42, 0.1),
+      rgba(15, 23, 42, 0.04) 40%,
+      rgba(15, 23, 42, 0.02) 70%,
+      rgba(15, 23, 42, 0)
+    ),
     linear-gradient(
       to bottom,
       color-mix(in srgb, var(--accent) 22%, transparent),
@@ -1041,12 +1052,34 @@ a {
   inset: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.6);
   opacity: 0.7;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.primary-button::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0.4rem;
+  inset-block: 0.35rem;
+  background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.12), transparent 70%);
+  opacity: 0.9;
+  z-index: 0;
   pointer-events: none;
 }
 
 .primary-button > * {
   position: relative;
   z-index: 1;
+}
+
+.primary-button-label,
+.primary-button .button-label {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35), 0 0 1px rgba(15, 23, 42, 0.45);
+}
+
+[data-theme="dark"] .primary-button-label,
+[data-theme="dark"] .primary-button .button-label {
+  text-shadow: 0 1px 0 rgba(15, 23, 42, 0.65), 0 0 1px rgba(0, 0, 0, 0.75);
 }
 
 .primary-button--lg {
@@ -1058,6 +1091,13 @@ a {
 .primary-button:hover {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.06)),
+    linear-gradient(
+      to bottom,
+      rgba(15, 23, 42, 0.12),
+      rgba(15, 23, 42, 0.05) 40%,
+      rgba(15, 23, 42, 0.02) 70%,
+      rgba(15, 23, 42, 0)
+    ),
     linear-gradient(
       to bottom,
       color-mix(in srgb, var(--accent) 32%, transparent),
@@ -1077,6 +1117,13 @@ a {
   transform: translateY(0);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)),
+    linear-gradient(
+      to bottom,
+      rgba(15, 23, 42, 0.1),
+      rgba(15, 23, 42, 0.04) 40%,
+      rgba(15, 23, 42, 0.02) 70%,
+      rgba(15, 23, 42, 0)
+    ),
     linear-gradient(
       to bottom,
       color-mix(in srgb, var(--accent) 24%, transparent),
@@ -1150,6 +1197,7 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
