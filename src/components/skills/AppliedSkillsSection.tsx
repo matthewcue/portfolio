@@ -92,7 +92,7 @@ const AppliedSkillsSection = ({
               {highlightedLabs.map((lab) => (
                 <Link
                   key={lab.slug}
-                  to="/lab"
+                  to="/work"
                   className="applied-card"
                   onPointerEnter={() => setInteractive(true)}
                   onPointerLeave={() => setInteractive(false)}

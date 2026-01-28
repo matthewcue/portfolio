@@ -9,8 +9,8 @@ const NotFoundPage = () => (
       <Link className="button" to="/">
         Go home
       </Link>
-      <Link className="button ghost" to="/projects">
-        View projects
+      <Link className="button ghost" to="/work">
+        View applied work
       </Link>
     </div>
   </PageTransition>

@@ -40,12 +40,12 @@ const SkillsCtaSection = ({ email }: SkillsCtaSectionProps) => {
           <p className="skills-cta__footer">
             You can also see how I think about problems in my{" "}
             <Link
-              to="/lab"
+              to="/work"
               className="text-link"
               onPointerEnter={() => setInteractive(true)}
               onPointerLeave={() => setInteractive(false)}
             >
-              lab notes
+              applied work
             </Link>{" "}
             and{" "}
             <Link

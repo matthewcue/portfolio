@@ -230,7 +230,7 @@ const HomePage = () => {
                     <li>Diagnose Wi-Fi, DNS, and VPN problems on small networks.</li>
                     <li>Keep Windows and Linux installs usable with basic hardening and updates.</li>
                   </motion.ul>
-                  <Link className="text-link" to="/projects">
+                  <Link className="text-link" to="/work">
                     See more examples →
                   </Link>
                 </motion.article>
@@ -256,7 +256,7 @@ const HomePage = () => {
                     <li>Run a small homelab with VMs to practice server administration.</li>
                     <li>Build lightweight web tools like this site to present my work.</li>
                   </motion.ul>
-                  <Link className="text-link" to="/lab">
+                  <Link className="text-link" to="/work">
                     Explore my lab →
                   </Link>
                 </motion.article>

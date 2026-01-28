@@ -4,8 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Bars3Icon,
-  BeakerIcon,
-  FolderIcon,
+  BriefcaseIcon,
   HomeIcon,
   PencilSquareIcon,
   SparklesIcon,
@@ -19,8 +18,7 @@ import { useTheme } from "../theme/ThemeProvider";
 // Update this single config array to add, remove, or rename navigation items.
 const navItems = [
   { label: "Home", to: "/", icon: HomeIcon },
-  { label: "Projects", to: "/projects", icon: FolderIcon },
-  { label: "Lab", to: "/lab", icon: BeakerIcon },
+  { label: "Work", to: "/work", icon: BriefcaseIcon },
   { label: "Skills", to: "/skills", icon: SparklesIcon },
   { label: "Writing", to: "/writing", icon: PencilSquareIcon },
   { label: "About", to: "/about", icon: UserCircleIcon }

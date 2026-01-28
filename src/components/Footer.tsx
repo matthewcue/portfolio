@@ -43,7 +43,7 @@ const Footer = () => {
           <div className="footer-links">
             {[
               { label: "Home", to: "/" },
-              { label: "Projects", to: "/projects" },
+              { label: "Work", to: "/work" },
               { label: "Skills", to: "/skills" },
               { label: "About", to: "/about" }
             ].map((item) => (

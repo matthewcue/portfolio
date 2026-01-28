@@ -19,6 +19,8 @@ export interface LabEntry {
   lessons: string[];
   relatedProjects?: string[];
   skillsUsed?: string[];
+  featured?: boolean;
+  status?: "completed" | "in-progress" | "planned";
 }
 
 export const labEntries: LabEntry[] = [

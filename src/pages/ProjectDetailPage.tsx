@@ -12,8 +12,8 @@ const ProjectDetailPage = () => {
       <PageTransition>
         <h1>Project not found</h1>
         <p>We couldn’t find that project. Try the full list instead.</p>
-        <Link className="text-link" to="/projects">
-          Back to projects →
+        <Link className="text-link" to="/work">
+          Back to work →
         </Link>
       </PageTransition>
     );

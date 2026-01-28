@@ -18,6 +18,7 @@ export interface Project {
   role: string;
   startDate?: string;
   endDate?: string;
+  date?: string;
   stack: string[];
   skillsDemonstrated: string[];
   outcome?: string;

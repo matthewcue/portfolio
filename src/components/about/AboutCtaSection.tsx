@@ -46,21 +46,12 @@ const AboutCtaSection = () => {
           </Link>
           , and how I apply them in my{" "}
           <Link
-            to="/projects"
+            to="/work"
             className="text-link"
             onPointerEnter={() => setInteractive(true)}
             onPointerLeave={() => setInteractive(false)}
           >
-            projects
-          </Link>
-          {" "}and{" "}
-          <Link
-            to="/lab"
-            className="text-link"
-            onPointerEnter={() => setInteractive(true)}
-            onPointerLeave={() => setInteractive(false)}
-          >
-            lab notes
+            applied work
           </Link>
           .
         </p>

@@ -4,9 +4,9 @@ import SiteLayout from "./layout/SiteLayout";
 import ThemeProvider from "./theme/ThemeProvider";
 import { CursorProvider } from "./cursor/CursorContext";
 import HomePage from "./pages/HomePage";
-import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
-import LabPage from "./pages/LabPage";
+import WorkPage from "./pages/WorkPage";
+import LabDetailPage from "./pages/LabDetailPage";
 import SkillsPage from "./pages/SkillsPage";
 import WritingPage from "./pages/WritingPage";
 import PostDetailPage from "./pages/PostDetailPage";
@@ -22,9 +22,11 @@ const AppRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route element={<SiteLayout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/work" element={<WorkPage />} />
+          <Route path="/projects" element={<Navigate to="/work" replace />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-          <Route path="/lab" element={<LabPage />} />
+          <Route path="/lab" element={<Navigate to="/work" replace />} />
+          <Route path="/lab/:slug" element={<LabDetailPage />} />
           <Route path="/skills" element={<SkillsPage />} />
           <Route path="/writing" element={<WritingPage />} />
           <Route path="/writing/:slug" element={<PostDetailPage />} />
