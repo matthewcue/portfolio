@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import SiteLayout from "./layout/SiteLayout";
 import ThemeProvider from "./theme/ThemeProvider";
+import { CursorProvider } from "./cursor/CursorContext";
 import HomePage from "./pages/HomePage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
@@ -41,7 +42,10 @@ const App = () => (
   <BrowserRouter>
     {/* ThemeProvider owns light/dark state and localStorage persistence. */}
     <ThemeProvider>
-      <AppRoutes />
+      {/* CursorProvider lets interactive components opt into cursor effects. */}
+      <CursorProvider>
+        <AppRoutes />
+      </CursorProvider>
     </ThemeProvider>
   </BrowserRouter>
 );

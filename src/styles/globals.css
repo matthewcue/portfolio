@@ -7,6 +7,7 @@
   --border: #d9e2ec;
   --accent: #2563eb;
   --accent-soft: rgba(37, 99, 235, 0.12);
+  --accent-strong: rgba(37, 99, 235, 0.85);
   --navbar-height: 72px;
 }
 
@@ -19,6 +20,7 @@
   --border: #1e293b;
   --accent: #60a5fa;
   --accent-soft: rgba(96, 165, 250, 0.15);
+  --accent-strong: rgba(96, 165, 250, 0.85);
 }
 
 * {
@@ -31,6 +33,18 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
+}
+
+/* Custom cursor base styles (motion/size are controlled via Framer Motion). */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
 }
 
 a {
@@ -526,6 +540,128 @@ body.home-nav-transparent .theme-toggle {
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
+}
+
+/* Primary CTA: liquid glass styling driven by CSS variables on the element. */
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.55rem 1.35rem;
+  font-weight: 600;
+  color: #f8fafc;
+  border: 1px solid var(--primary-border);
+  background: var(--primary-bg);
+  box-shadow: 0 12px 32px var(--primary-glow);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+
+.primary-button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.05));
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.primary-button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.primary-button--lg {
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+}
+
+.primary-button:hover {
+  background: var(--primary-bg-hover);
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 18px 40px var(--primary-glow);
+}
+
+.primary-button:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.primary-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-ring), 0 12px 32px var(--primary-glow);
+}
+
+/* Secondary CTA: link-style with animated underline. */
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--secondary-color);
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.secondary-button:hover {
+  color: var(--secondary-color-strong);
+  transform: translateY(-1px);
+}
+
+.secondary-button__label {
+  position: relative;
+}
+
+.secondary-button__label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+.secondary-button:hover .secondary-button__label::after,
+.secondary-button:focus-visible .secondary-button__label::after {
+  transform: scaleX(1);
+}
+
+.secondary-button:focus-visible {
+  outline: none;
+  text-decoration: none;
+}
+
+.button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-button,
+  .secondary-button {
+    transition: none;
+  }
+
+  .primary-button:hover,
+  .secondary-button:hover {
+    transform: none;
+  }
+
+  .secondary-button__label::after {
+    transition: none;
+  }
 }
 
 .grid {
