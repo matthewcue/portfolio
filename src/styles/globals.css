@@ -10,6 +10,9 @@
   --accent-strong: rgba(37, 99, 235, 0.85);
   /* primary button ink: dark, slightly accent-tinted */
   --button-primary-ink: color-mix(in srgb, var(--accent) 35%, #020617 65%);
+  /* selection colors (light): accent-tinted wash + dark ink */
+  --selection-bg: color-mix(in srgb, var(--accent) 28%, #ffffff 72%);
+  --selection-fg: color-mix(in srgb, #020617 70%, var(--accent) 30%);
   --navbar-height: 72px;
   /* Adjust this offset if the floating nav overlaps your page content. */
   --floating-nav-offset: 96px;
@@ -25,7 +28,8 @@
   /* Base font stacks (stable, never change). */
   --font-plex: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  --font-garamond: "EB Garamond", "Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  --font-garamond: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   /* Role variables (will be swapped by variant). Defaults are a safe baseline. */
   --font-primary: var(--font-plex);
   --font-secondary: var(--font-garamond);
@@ -52,6 +56,9 @@
   --accent-strong: rgba(96, 165, 250, 0.85);
   /* primary button ink: light, slightly accent-tinted */
   --button-primary-ink: color-mix(in srgb, #e5e7eb 80%, var(--accent) 20%);
+  /* selection colors (dark): accent glow over dark bg */
+  --selection-bg: color-mix(in srgb, var(--accent) 32%, var(--bg) 68%);
+  --selection-fg: var(--text);
   --nav-surface-glass: var(--bg);
   --nav-surface-solid: var(--bg);
   --nav-border-soft: color-mix(in srgb, var(--accent) 22%, transparent);
@@ -82,6 +89,16 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+::-moz-selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-fg);
 }
 
 h1,
