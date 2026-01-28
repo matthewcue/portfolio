@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -37,6 +37,11 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
   const [canHover, setCanHover] = useState(false);
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+    setExpandedItemId(null);
+  }, []);
 
   // Track scroll position to switch between expanded and condensed nav states.
   useEffect(() => {
@@ -77,9 +82,8 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    setIsMobileMenuOpen(false);
-    setExpandedItemId(null);
-  }, [location.pathname]);
+    closeMobileMenu();
+  }, [closeMobileMenu, location.pathname]);
 
   useEffect(() => {
     const isHomeRoute = location.pathname === "/";
@@ -266,7 +270,7 @@ const Navbar = () => {
       {isMobile && isMobileMenuOpen && (
         <div
           className="nav-mobile-overlay nav-mobile-overlay--debug"
-          onClick={() => setIsMobileMenuOpen(false)}
+          onClick={closeMobileMenu}
         >
           <div className="nav-mobile-panel" onClick={(event) => event.stopPropagation()}>
             <div className="nav-mobile-header">
@@ -275,7 +279,7 @@ const Navbar = () => {
                 className="nav-mobile-close"
                 type="button"
                 aria-label="Close navigation"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={closeMobileMenu}
                 onPointerEnter={() => setInteractive(true)}
                 onPointerLeave={() => setInteractive(false)}
               >
@@ -292,6 +296,7 @@ const Navbar = () => {
                     <Link
                       className={`nav-mobile-link ${isActive ? "is-active" : ""}`.trim()}
                       to={item.to}
+                      onClick={closeMobileMenu}
                       onPointerEnter={() => setInteractive(true)}
                       onPointerLeave={() => setInteractive(false)}
                     >
