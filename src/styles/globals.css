@@ -1072,6 +1072,16 @@ a {
   z-index: 1;
 }
 
+.primary-button-label,
+.primary-button .button-label {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35), 0 0 1px rgba(15, 23, 42, 0.45);
+}
+
+[data-theme="dark"] .primary-button-label,
+[data-theme="dark"] .primary-button .button-label {
+  text-shadow: 0 1px 0 rgba(15, 23, 42, 0.65), 0 0 1px rgba(0, 0, 0, 0.75);
+}
+
 .primary-button--lg {
   min-height: 44px;
   padding: 0.8rem 1.5rem;
