@@ -20,6 +20,22 @@
   --footer-surface: #f1f3f7;
   /* Home page uses this to offset slides beneath the floating nav. */
   --nav-offset: var(--floating-nav-offset);
+  /* Base font stacks (stable, never change). */
+  --font-plex: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --font-garamond: "EB Garamond", "Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  /* Role variables (will be swapped by variant). Defaults are a safe baseline. */
+  --font-primary: var(--font-plex);
+  --font-secondary: var(--font-garamond);
+  /* Semantic roles (always map via primary/secondary). */
+  --font-heading: var(--font-primary);
+  --font-button: var(--font-primary);
+  --font-accent: var(--font-primary);
+  --font-list-heading: var(--font-primary);
+  --font-body: var(--font-secondary);
+  --font-paragraph: var(--font-secondary);
+  --font-label: var(--font-secondary);
+  --font-list-body: var(--font-secondary);
 }
 
 [data-theme="dark"] {
@@ -40,16 +56,91 @@
   --footer-surface: #111827;
 }
 
+/* Variant A (odd refreshes): Primary = Plex, Secondary = Garamond */
+[data-typography-variant="plex-primary"] {
+  --font-primary: var(--font-plex);
+  --font-secondary: var(--font-garamond);
+}
+
+/* Variant B (even refreshes): Primary = Garamond, Secondary = Plex */
+[data-typography-variant="garamond-primary"] {
+  --font-primary: var(--font-garamond);
+  --font-secondary: var(--font-plex);
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+button,
+.button,
+.primary-button,
+.secondary-button {
+  font-family: var(--font-button);
+}
+
+.heading-text {
+  font-family: var(--font-heading);
+}
+
+.button-text {
+  font-family: var(--font-button);
+}
+
+.accent-text {
+  font-family: var(--font-accent);
+}
+
+.body-text {
+  font-family: var(--font-body);
+}
+
+.label-text {
+  font-family: var(--font-label);
+}
+
+.list-heading-text {
+  font-family: var(--font-list-heading);
+}
+
+.list-body-text {
+  font-family: var(--font-list-body);
+}
+
+.section-description,
+.muted,
+.chip-label,
+.badge-label,
+.nav-label,
+.nav-link-label,
+.section-label,
+.footer-label,
+.social-chip-label,
+.secondary-button__label,
+.applied-skills__label,
+.about-fact-card__label,
+.work-filter-view__label,
+.work-card__meta-label,
+.snapshot-list li,
+.roadmap-list li {
+  font-family: var(--font-body);
 }
 
 /* Hide the native cursor when the custom cursor is active. */

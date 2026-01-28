@@ -4,6 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio | IT Support & Cloud</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=EB+Garamond:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (function () {
+        try {
+          var lock = window.localStorage.getItem("typographyLock");
+          var variant;
+          if (lock === "plex-primary" || lock === "garamond-primary") {
+            variant = lock;
+          } else {
+            var raw = window.localStorage.getItem("typographyCycle");
+            var cycle = raw ? parseInt(raw, 10) : 0;
+            if (!Number.isFinite(cycle)) cycle = 0;
+            cycle += 1;
+            window.localStorage.setItem("typographyCycle", String(cycle));
+            variant = cycle % 2 === 1 ? "plex-primary" : "garamond-primary";
+          }
+          document.documentElement.dataset.typographyVariant = variant;
+        } catch (e) {
+          document.documentElement.dataset.typographyVariant = "plex-primary";
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
