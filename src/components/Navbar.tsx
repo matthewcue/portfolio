@@ -14,6 +14,7 @@ import {
 import Icon from "./Icon";
 import { useCursor } from "../cursor/CursorContext";
 import { useTheme } from "../theme/ThemeProvider";
+import ThemeToggle from "./ThemeToggle";
 
 // Update this single config array to add, remove, or rename navigation items.
 const navItems = [
@@ -79,6 +80,19 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
     setExpandedItemId(null);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      return;
+    }
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isMobileMenuOpen]);
 
   const navCursorTransition = prefersReducedMotion
     ? { duration: 0 }
@@ -233,7 +247,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobile && isMobileMenuOpen && (
           <motion.div
-            className="nav-mobile-overlay"
+            className="mobile-nav-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -241,47 +255,51 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <motion.div
-              className="nav-mobile-panel"
+              className="mobile-nav-panel"
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.24 }}
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="nav-mobile-header">
-                <span className="nav-mobile-title">Navigate</span>
-              </div>
-              <ul className="nav-mobile-list" role="list">
+              <nav className="mobile-nav-links" aria-label="Primary">
                 {navItems.map((item) => {
                   const IconComponent = item.icon;
                   const isActive = isItemActive(item.to);
 
                   return (
-                    <li key={item.to} className="nav-mobile-item">
-                      <Link
-                        className={`nav-mobile-link ${isActive ? "is-active" : ""}`.trim()}
-                        to={item.to}
-                        onPointerEnter={() => setInteractive(true)}
-                        onPointerLeave={() => setInteractive(false)}
-                      >
-                        {isActive && (
-                          <motion.span
-                            className="nav-cursor nav-cursor-mobile"
-                            layoutId="navCursorMobile"
-                            transition={navCursorTransition}
-                          />
-                        )}
-                        <span className="nav-link-content">
-                          <Icon>
-                            <IconComponent />
-                          </Icon>
-                          <span className="nav-link-label">{item.label}</span>
-                        </span>
-                      </Link>
-                    </li>
+                    <Link
+                      key={item.to}
+                      className={`nav-mobile-link ${isActive ? "is-active" : ""}`.trim()}
+                      to={item.to}
+                      onPointerEnter={() => setInteractive(true)}
+                      onPointerLeave={() => setInteractive(false)}
+                    >
+                      {isActive && (
+                        <motion.span
+                          className="nav-cursor nav-cursor-mobile"
+                          layoutId="navCursorMobile"
+                          transition={navCursorTransition}
+                        />
+                      )}
+                      <span className="nav-link-content">
+                        <Icon>
+                          <IconComponent />
+                        </Icon>
+                        <span className="nav-link-label">{item.label}</span>
+                      </span>
+                    </Link>
                   );
                 })}
-              </ul>
+              </nav>
+              <div className="mobile-nav-footer">
+                <div className="mobile-theme-row">
+                  <span className="mobile-theme-label">Theme</span>
+                  <div className="mobile-theme-control">
+                    <ThemeToggle />
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
