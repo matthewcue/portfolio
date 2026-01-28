@@ -10,6 +10,7 @@ const ResumePage = () => (
       </p>
       <div className="button-row">
         <a className="button" href="/matthew-cue_resume.pdf" download>
+        <a className="button" href={profile.resumeUrl} download>
           Download PDF
         </a>
         <a className="button ghost" href="/matthew-cue_resume.pdf" target="_blank" rel="noreferrer">

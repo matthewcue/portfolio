@@ -6,6 +6,7 @@ import Icon from "../Icon";
 import PrimaryButton from "../buttons/PrimaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { useCursor } from "../../cursor/CursorContext";
+import profile from "../../content/profile";
 
 interface SkillsCtaSectionProps {
   email: string;
@@ -34,6 +35,7 @@ const SkillsCtaSection = ({ email }: SkillsCtaSectionProps) => {
               Email me
             </PrimaryButton>
             <SecondaryButton href="/matthew-cue_resume.pdf" download icon={<Icon><ArrowRightIcon /></Icon>}>
+            <SecondaryButton href={profile.resumeUrl} download icon={<Icon><ArrowRightIcon /></Icon>}>
               Download resume
             </SecondaryButton>
           </div>

@@ -356,6 +356,7 @@ const HomePage = () => {
                       Email me
                     </PrimaryButton>
                     <SecondaryButton href="/matthew-cue_resume.pdf" download icon={<Icon><DocumentArrowDownIcon /></Icon>}>
+                    <SecondaryButton href={profile.resumeUrl} download icon={<Icon><DocumentArrowDownIcon /></Icon>}>
                       Download resume
                     </SecondaryButton>
                   </div>
@@ -385,6 +386,7 @@ const HomePage = () => {
                 <div className="panel-footer-links">
                   <Link to="/about">About</Link>
                   <a href="/matthew-cue_resume.pdf" target="_blank" rel="noreferrer">
+                  <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
                     Resume
                   </a>
                 </div>

@@ -25,6 +25,7 @@ const AboutCtaSection = () => {
         </h2>
         <div className="about-cta__actions">
           <PrimaryButton href="/matthew-cue_resume.pdf" download>
+          <PrimaryButton href={profile.resumeUrl} download>
             Download resume (PDF)
           </PrimaryButton>
           <SecondaryButton href={`mailto:${profile.email}`}>Email me</SecondaryButton>
